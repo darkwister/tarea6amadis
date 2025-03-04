@@ -3,12 +3,20 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
-
+          <ion-grid>
+            <ion-row>
+              <ion-col size="auto">
+                <ion-icon name="briefcase" size="large"></ion-icon>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-list-header>Herramientas</ion-list-header>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
           @for (p of appPages; track p; let i = $index) {
             <ion-menu-toggle auto-hide="false">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                <img *ngIf="p.icon?.startsWith('assets/')" [src]="p.icon" slot="start" width="26" height="26" class="custom-img"/>
                 <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
