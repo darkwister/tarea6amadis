@@ -1,13 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>gender-predict</ion-title>
+    <ion-title>Predecir sexo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">gender-predict</ion-title>
+      <ion-title size="large">Predecir sexo</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-input type="text" placeholder="Nombre a predecir" [(ngModel)]="targetName"></ion-input>
+  <ion-button (click)="getData(targetName || '')" expand="block" fill="clear" shape="round">
+    Predecir
+  </ion-button>
+  <ion-label position="fixed">{{gender}}</ion-label>
 </ion-content>
