@@ -7,8 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WeatherServiceService {
-  private apiKey: string = 'dYRxIcszt3bO2a7y';
-  private apiUrl: string = 'https://cors-anywhere.herokuapp.com/https://my.meteoblue.com/packages/basic-1h';
+  private apiKey: string = '6d9ce32e1a0738c211402eceff984c13';
 
   constructor() {}
 
@@ -16,10 +15,12 @@ export class WeatherServiceService {
     const params = new URLSearchParams({
       lat: latitude.toString(),
       lon: longitude.toString(),
-      apikey: this.apiKey
+      apikey: this.apiKey,
+      lang: 'es',
+      units: 'metric'
     }).toString();
 
-    const urlWithParams = `${this.apiUrl}?${params}`;
+    const urlWithParams = `https://api.openweathermap.org/data/2.5/weather?${params}`;
 
     const request = Http.request({
       method: 'GET',
@@ -32,14 +33,16 @@ export class WeatherServiceService {
         return throwError(() => new Error('No se pudo obtener el clima.'));
       }),
       map(response => {
-        const weatherData = response.data.data_1h;
-        const currentTime = weatherData.time[0]; 
-        const temperature = weatherData.temperature[0]; 
-        const humidity = weatherData.relativehumidity[0]; 
-        const windSpeed = weatherData.windspeed[0]; 
+        const weatherData = response.data; 
+        const time = weatherData.dt;
+        const description = weatherData.weather[0].description;
+        const temperature = weatherData.main.temp; 
+        const humidity = weatherData.main.humidity; 
+        const windSpeed = weatherData.wind.speed; 
 
         return {
-          time: currentTime,
+          time: time,
+          description: description,
           temperature: temperature,
           humidity: humidity,
           windSpeed: windSpeed
