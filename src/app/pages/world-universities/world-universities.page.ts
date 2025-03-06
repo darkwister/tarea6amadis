@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonSelectOption, IonSelect, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonItem, IonSelectOption, IonSelect, IonList, IonCardHeader, IonCard, IonCardTitle, IonCardContent, IonProgressBar } from '@ionic/angular/standalone';
 import { HttpClient, HttpClientModule, HttpErrorResponse, HttpClientJsonpModule } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-world-universities',
   templateUrl: './world-universities.page.html',
   styleUrls: ['./world-universities.page.scss'],
   standalone: true,
-  imports: [IonList, IonSelect, IonSelectOption, IonItem, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, HttpClientModule, HttpClientJsonpModule]
+  imports: [IonProgressBar, IonCardContent, IonCardTitle, IonCard, IonCardHeader, IonList, IonSelect, IonSelectOption, IonItem, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, HttpClientModule, HttpClientJsonpModule]
 })
 export class WorldUniversitiesPage implements OnInit {
   targetUniversity?: string;
   targetCountry?: string;
   responseData: any[] = [];
+  isLoading: boolean = false;
   countries: string[] = [
   'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Andorra', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria',
   'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei Darussalam', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark',
@@ -50,10 +51,13 @@ export class WorldUniversitiesPage implements OnInit {
 
   onCountryChange() {
     if (this.targetCountry) {
+      this.isLoading = true;
       this.getUniversityByCountry(this.targetCountry).subscribe(data => {
         this.responseData = data;
+        this.isLoading = false;
         console.log('Universities:', this.responseData);
-      });
+      }),
+      () => this.isLoading = false;
     }
   }
 
