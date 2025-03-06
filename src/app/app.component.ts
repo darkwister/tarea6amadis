@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { briefcase, homeSharp, homeOutline, maleFemaleSharp, maleFemaleOutline, calendarSharp, calendarOutline, schoolSharp, schoolOutline, cloudyNightOutline, cloudyNightSharp, logoWordpress, informationCircleSharp, informationCircleOutline } from 'ionicons/icons';
+import { briefcase, homeSharp, homeOutline, maleFemaleSharp, maleFemaleOutline, calendarSharp, calendarOutline, schoolSharp, schoolOutline, cloudyNightOutline, cloudyNightSharp, informationCircleSharp, informationCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +20,10 @@ export class AppComponent {
     { title: 'Universidades del mundo', url: '/world-universities', icon: 'school' },
     { title: 'Reporte del clima local', url: '/weather-repo-rd', icon: 'cloudy-night' },
     { title: 'Pokedex', url: '/pokedex', icon: 'assets/icon/pokemon.png' },
-    { title: 'Ultimas noticias en pag de wordpress', url:'/wordpress-lastest/', icon: 'logoWordpress'},
+    { title: 'Ultimas noticias en pag de wordpress', url:'/wordpress-lastest/', icon: 'assets/icon/logo-wordpress.svg'},
     { title: 'Acerca de', url:'/about-me', icon: 'information-circle'}
   ];
   constructor() {
-    addIcons({briefcase, homeSharp, homeOutline, maleFemaleOutline, maleFemaleSharp, calendarSharp, calendarOutline, schoolSharp, schoolOutline, cloudyNightOutline, cloudyNightSharp, logoWordpress, informationCircleSharp, informationCircleOutline})
+    addIcons({briefcase, homeSharp, homeOutline, maleFemaleOutline, maleFemaleSharp, calendarSharp, calendarOutline, schoolSharp, schoolOutline, cloudyNightOutline, cloudyNightSharp, informationCircleSharp, informationCircleOutline})
   }
 }
