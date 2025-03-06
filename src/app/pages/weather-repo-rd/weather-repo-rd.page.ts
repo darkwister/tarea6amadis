@@ -25,7 +25,6 @@ export class WeatherRepoRdPage implements OnInit {
     this.weatherService.getWeatherData(latitude, longitude).subscribe(
       (data) => {
         this.weatherData = data;
-        console.log('Clima:', this.weatherData);
         this.isLoading = false;
       },
       (error) => {
