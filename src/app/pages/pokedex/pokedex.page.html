@@ -1,13 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>pokedex</ion-title>
+    <ion-title>Pokedex</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">pokedex</ion-title>
+      <ion-title size="large">Pokedex</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-input type="text" placeholder="Pokemon" [(ngModel)]="targetPokemon" class="ion-text-lg-center"></ion-input>
+  <ion-button (click)="getPokemonInfo(targetPokemon || '')" expand="block" fill="clear" shape="round"> Buscar en la Pokedex</ion-button>
+  <ion-card *ngIf="pokemon">
+    <ion-card-header>
+      <ion-card-title>{{ pokemon.name | uppercase }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img *ngIf="pokemon.image" [src]="pokemon.image" height="48" width="48"></ion-img>
+      <p><strong>Experiencia Base:</strong> {{ pokemon.baseExp }}</p>
+      
+      <ion-list>
+        <ion-item *ngFor="let ability of pokemon.abilities">
+          <ion-label>{{ ability.ability.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
