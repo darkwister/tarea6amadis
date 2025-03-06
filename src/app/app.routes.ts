@@ -3,12 +3,8 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/main-menu',
+    redirectTo: '/about-me',
     pathMatch: 'full',
-  },
-  {
-    path: 'main-menu',
-    loadComponent: () => import('./pages/main-menu/main-menu.page').then( m => m.MainMenuPage)
   },
   {
     path: 'gender-predict',

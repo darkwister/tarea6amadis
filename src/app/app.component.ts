@@ -14,7 +14,6 @@ import { briefcase, homeSharp, homeOutline, maleFemaleSharp, maleFemaleOutline, 
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Menu', url: '/main-menu', icon: 'home' },
     { title: 'Predecir sexo', url: '/gender-predict', icon: 'male-female' },
     { title: 'Determinar edad', url: '/age-determine', icon: 'calendar' },
     { title: 'Universidades del mundo', url: '/world-universities', icon: 'school' },
