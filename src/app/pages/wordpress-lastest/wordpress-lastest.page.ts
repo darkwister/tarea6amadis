@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardTitle, IonCardSubtitle, IonCardHeader, IonCardContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardTitle, IonCardSubtitle, IonCardHeader, IonCardContent, IonProgressBar } from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,9 +11,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './wordpress-lastest.page.html',
   styleUrls: ['./wordpress-lastest.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonProgressBar, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class WordpressLastestPage implements OnInit {
+  isLoading = false;
   lastestNotice: any[] = [];
   sanitizedContent: any;
   url = 'https://kinsta.com/wp-json/wp/v2/posts';
@@ -26,12 +27,14 @@ export class WordpressLastestPage implements OnInit {
 
 
   getNotices() : Observable<any> {
+    this.isLoading = true;
     return this.http.get<any[]>(this.url);
   }
 
   fetchNotices() {
     this.getNotices().subscribe(
       (data) => {
+        this.isLoading = true;
         this.lastestNotice = data.slice(0,3); 
 
         this.lastestNotice.forEach((notice) => {
@@ -41,9 +44,11 @@ export class WordpressLastestPage implements OnInit {
 
           notice.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(firstParagraph);
         })
+        this.isLoading = false;
       },
       (error) => {
         console.error('Error al obtener las noticias:', error);
+        this.isLoading = false;
       }
     );
   }

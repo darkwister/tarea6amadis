@@ -10,6 +10,7 @@
       <ion-title size="large">Ultimas noticias de KINSTA</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate" value="0.42" buffer="0.5" reversed="true" color="tertiary"></ion-progress-bar>
   <ion-card *ngFor="let notice of lastestNotice">
     <ion-card-header>
       <ion-card-title [innerHTML]="notice.title.rendered"></ion-card-title>
