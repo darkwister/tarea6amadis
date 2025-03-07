@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">cotueaoapp</string>
+    <string name="title_activity_main">cotueaoapp</string>
+    <string name="package_name">ionic.cotueaoapp</string>
+    <string name="custom_url_scheme">ionic.cotueaoapp</string>
+</resources>
