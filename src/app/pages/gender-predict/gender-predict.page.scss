@@ -1,0 +1,10 @@
+.my-custom-alert {
+    --background: var(--ion-color-primary); /* Color base */
+    --color: white; /* Texto en blanco */
+  }
+  
+  .my-custom-alert .alert-wrapper {
+    background: var(--ion-color-primary) !important; /* Color de fondo */
+    color: white !important; /* Color de texto */
+  }
+  

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonLabel, IonButton } from '@ionic/angular/standalone';
+import { AlertController,IonAlert, IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -9,12 +9,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   templateUrl: './gender-predict.page.html',
   styleUrls: ['./gender-predict.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonLabel, IonButton, HttpClientModule]
+  imports: [ IonAlert, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonLabel, IonButton, HttpClientModule]
 })
 export class GenderPredictPage implements OnInit {
-  targetName?: string;
+  targetName?: string; 
   gender?: string;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -23,11 +23,42 @@ export class GenderPredictPage implements OnInit {
     const url = `https://api.genderize.io/?name=${name}`;
     this.http.get(url).subscribe((response: any) => {
       this.gender = response.gender
-      console.log(this.gender);
-      console.log(response.probability);
+      let alertColor = '';
+      let alertMessage = '';
+      
+      if (this.gender === 'male') {
+        alertMessage = 'Es masculino';
+        alertColor = 'primary';
+        
+      } else if (this.gender === 'female') {
+        alertMessage = 'Es femenino';
+        alertColor = 'tertiary';
+                
+      } else {
+        alertMessage = 'Sexo no identificado';
+        alertColor = 'medium';
+      }
+
+      this.presentAlert(alertMessage, 'Nombre procesado: ' + name, alertColor);
     }, error => {
       console.log(error);
+      this.presentAlert('Error al obtener el sexo', 'Nombre procesado: ' + name, 'danger');
     })
+  }
+
+  async presentAlert(header: string, message: string, color: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      cssClass: 'my-custom-alert', 
+      buttons: [] 
+    });
+
+    await alert.present();
+
+    setTimeout(() => {
+      alert.dismiss();
+    }, 2000);
   }
   
 }
