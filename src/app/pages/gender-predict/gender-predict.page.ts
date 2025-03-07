@@ -9,7 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   templateUrl: './gender-predict.page.html',
   styleUrls: ['./gender-predict.page.scss'],
   standalone: true,
-  imports: [ IonAlert, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonLabel, IonButton, HttpClientModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonInput, IonButton, HttpClientModule]
 })
 export class GenderPredictPage implements OnInit {
   targetName?: string; 
