@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AlertController,IonAlert, IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonLabel, IonButton } from '@ionic/angular/standalone';
+import { AlertController,IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonButton } from '@ionic/angular/standalone';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
