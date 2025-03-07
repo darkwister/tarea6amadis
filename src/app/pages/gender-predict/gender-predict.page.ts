@@ -14,6 +14,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class GenderPredictPage implements OnInit {
   targetName?: string; 
   gender?: string;
+  imageResult?: string;
   constructor(private http: HttpClient, private alertController: AlertController) { }
 
   ngOnInit() {
@@ -23,34 +24,28 @@ export class GenderPredictPage implements OnInit {
     const url = `https://api.genderize.io/?name=${name}`;
     this.http.get(url).subscribe((response: any) => {
       this.gender = response.gender
-      let alertColor = '';
       let alertMessage = '';
-      
       if (this.gender === 'male') {
         alertMessage = 'Es masculino';
-        alertColor = 'primary';
-        
+        this.imageResult = 'assets/images/gender-module/blue.png'
       } else if (this.gender === 'female') {
         alertMessage = 'Es femenino';
-        alertColor = 'tertiary';
-                
+        this.imageResult = 'assets/images/gender-module/pink.png'
       } else {
         alertMessage = 'Sexo no identificado';
-        alertColor = 'medium';
       }
 
-      this.presentAlert(alertMessage, 'Nombre procesado: ' + name, alertColor);
+      this.presentAlert(alertMessage, 'Nombre procesado: ' + name);
     }, error => {
       console.log(error);
-      this.presentAlert('Error al obtener el sexo', 'Nombre procesado: ' + name, 'danger');
+      this.presentAlert('Error al obtener el sexo', 'Nombre procesado: ' + name);
     })
   }
 
-  async presentAlert(header: string, message: string, color: string) {
+  async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
       message,
-      cssClass: 'my-custom-alert', 
       buttons: [] 
     });
 
